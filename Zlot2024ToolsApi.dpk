@@ -36,8 +36,10 @@ contains
   Wizard in 'src\Wizard.pas',
   Menu in 'src\Menu.pas',
   Startup in 'src\Startup.pas',
-  OTAInterfaces in 'src\OTAInterfaces.pas',
-  ColorVisualizer in 'src\visualizers\ColorVisualizer.pas' {Frame1: TFrame},
-  BaseVisualizer in 'src\visualizers\BaseVisualizer.pas' {Frame3: TFrame};
+  OTAFunctions in 'src\ota\OTAFunctions.pas',
+  OTAInterfaces in 'src\ota\OTAInterfaces.pas',
+  VisualizerRegister in 'src\visualizers\VisualizerRegister.pas',
+  ColorVisualizer in 'src\visualizers\ColorVisualizer.pas',
+  BaseVisualizer in 'src\visualizers\BaseVisualizer.pas';
 
 end.

@@ -25,6 +25,7 @@ type
     function EditView: IOTAEditView;
     function EditActions: IOTAEditActions;
     function EditBuffer: IOTAEditBuffer;
+    function DebuggerServices: IOTADebuggerServices;
   end;
 
 var
@@ -81,6 +82,11 @@ begin
       end;
   end;
   Result := nil;
+end;
+
+function TOTAInterfaces.DebuggerServices: IOTADebuggerServices;
+begin
+  QuerySvcs(BorlandIDEServices, IOTADebuggerServices, Result);
 end;
 
 function TOTAInterfaces.EditActions: IOTAEditActions;
