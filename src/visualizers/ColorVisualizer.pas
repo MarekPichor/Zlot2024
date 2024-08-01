@@ -43,24 +43,14 @@ type
 
 implementation
 
+{$R *.dfm}
+
 { TfmColorVisualizer }
 
 constructor TfmColorVisualizer.Create(AOwner: TComponent);
 begin
   inherited;
-  Height := 150;
-  Width := 300;
-  P_Color := TPanel.Create(Self);
-  P_Color.Parent := Self;
-  P_Color.Align := alClient;
-  P_Color.AlignWithMargins := True;
-  P_Color.BevelOuter := bvLowered;
-  P_Color.ShowCaption := False;
 
-  E_Edit := TEdit.Create(Self);
-  E_Edit.Parent := Self;
-  E_Edit.Align := alTop;
-  E_Edit.AlignWithMargins := True;
 end;
 
 procedure TfmColorVisualizer.MarkUnavailable(
