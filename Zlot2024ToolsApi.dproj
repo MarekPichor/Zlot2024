@@ -144,6 +144,13 @@
         <DCCReference Include="src\visualizers\VisualizerRegister.pas"/>
         <DCCReference Include="src\visualizers\ColorVisualizer.pas"/>
         <DCCReference Include="src\visualizers\BaseVisualizer.pas"/>
+        <DCCReference Include="src\visualizers\ImageVisualizer.pas"/>
+        <DCCReference Include="src\FileUtils.pas"/>
+        <DCCReference Include="src\visualizers\ComponentVisualizer.pas">
+            <Form>Frame1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -18,6 +18,7 @@ type
     fClosedProc : TOTAVisualizerClosedProcedure;
   protected
     function Evaluate(aExpression : String) : String;
+    procedure Loaded; override;
     property Completed : Boolean read fCompleted;
     property DeferredResult : String read fDeferredResult;
     property DeferredError : Boolean read fDeferredError;
@@ -41,6 +42,8 @@ type
     procedure MarkUnavailable(Reason: TOTAVisualizerUnavailableReason); virtual;
     procedure RefreshVisualizer(const Expression, TypeName, EvalResult: string); virtual;
     procedure SetClosedCallback(ClosedProc: TOTAVisualizerClosedProcedure);
+
+
   end;
 
   TFormVisualizerClass = class of TFormBaseVisualizer;
@@ -76,7 +79,7 @@ type
   public
     constructor Create(const Expression: string);
     { INTACustomDockableForm }
-    function GetCaption: string; virtual; abstract;
+    function GetCaption: string; virtual;
     function GetFrameClass: TCustomFrameClass; virtual; abstract;
     function GetIdentifier: string; virtual; abstract;
     procedure FrameCreated(AFrame: TCustomFrame);
@@ -100,7 +103,7 @@ type
 implementation
 
 uses
-  OTAFunctions;
+  OTAFunctions, OTAInterfaces;
 
 { TBaseVisualizer }
 
@@ -143,6 +146,11 @@ procedure TfrmBaseVisualizer.EvaluteComplete(const ExprStr, ResultStr: string;
   CanModify: Boolean; ResultAddress, ResultSize: LongWord; ReturnCode: Integer);
 begin
   EvaluateComplete(ExprStr, ResultStr, CanModify, TOTAAddress(ResultAddress), ResultSize, ReturnCode);
+end;
+
+procedure TfrmBaseVisualizer.Loaded;
+begin
+  inherited;
 end;
 
 procedure TfrmBaseVisualizer.MarkUnavailable(
@@ -238,6 +246,11 @@ begin
   fFrame := TfrmBaseVisualizer(AFrame);
 end;
 
+function TFormBaseVisualizer.GetCaption: string;
+begin
+  Result := fExpression;
+end;
+
 function TFormBaseVisualizer.GetEditState: TEditState;
 begin
   Result := [];
@@ -290,6 +303,8 @@ begin
   fForm := Form;
   if fFrame <> nil then
     TfrmBaseVisualizer(fFrame).fForm := Form;
+  Interfaces.ThemeServices.RegisterFormClass(TCustomFormClass(fForm.ClassType));
+
 end;
 
 procedure TFormBaseVisualizer.SetFrame(Frame: TCustomFrame);

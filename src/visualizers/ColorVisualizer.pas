@@ -36,7 +36,6 @@ type
 
   TFormColorVisualizer = class(TFormBaseVisualizer)
   public
-    function GetCaption: string; override;
     function GetFrameClass: TCustomFrameClass; override;
     function GetIdentifier: string; override;
   end;
@@ -90,11 +89,6 @@ begin
 end;
 
 { TFormColorVisualizer }
-
-function TFormColorVisualizer.GetCaption: string;
-begin
-  Result := '[Zlot 2024] Wizualizacja koloru';
-end;
 
 function TFormColorVisualizer.GetFrameClass: TCustomFrameClass;
 begin

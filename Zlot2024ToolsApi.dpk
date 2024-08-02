@@ -40,6 +40,9 @@ contains
   OTAInterfaces in 'src\ota\OTAInterfaces.pas',
   VisualizerRegister in 'src\visualizers\VisualizerRegister.pas',
   ColorVisualizer in 'src\visualizers\ColorVisualizer.pas',
-  BaseVisualizer in 'src\visualizers\BaseVisualizer.pas';
+  BaseVisualizer in 'src\visualizers\BaseVisualizer.pas',
+  ImageVisualizer in 'src\visualizers\ImageVisualizer.pas',
+  FileUtils in 'src\FileUtils.pas',
+  ComponentVisualizer in 'src\visualizers\ComponentVisualizer.pas' {Frame1: TFrame};
 
 end.

@@ -26,6 +26,7 @@ type
     function EditActions: IOTAEditActions;
     function EditBuffer: IOTAEditBuffer;
     function DebuggerServices: IOTADebuggerServices;
+    function ThemeServices: IOTAIDEThemingServices250;
   end;
 
 var
@@ -215,6 +216,11 @@ begin
     Exit(nil);
   if wEditor.QueryInterface(IOTASourceEditor, Result) <> S_OK then
     Exit(nil);
+end;
+
+function TOTAInterfaces.ThemeServices: IOTAIDEThemingServices250;
+begin
+  QuerySvcs(BorlandIDEServices, IOTAIDEThemingServices250, Result);
 end;
 
 initialization
