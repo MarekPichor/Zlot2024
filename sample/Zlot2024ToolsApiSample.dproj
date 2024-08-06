@@ -107,6 +107,7 @@
         <DCCReference Include="uDBHandler.pas"/>
         <DCCReference Include="Grid.pas"/>
         <DCCReference Include="PngUtils.pas"/>
+        <DCCReference Include="..\src\ControlUtils.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

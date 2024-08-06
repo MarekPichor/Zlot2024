@@ -6,7 +6,7 @@ uses
   uDB in 'uDB.pas',
   uDBHandler in 'uDBHandler.pas',
   Grid in 'Grid.pas',
-  PngUtils in 'PngUtils.pas';
+  PngUtils in 'PngUtils.pas',
   ControlUtils in '..\src\ControlUtils.pas';
 
 {$R *.res}
