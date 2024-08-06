@@ -1,20 +1,23 @@
 object fmColorVisualizer: TfmColorVisualizer
   Left = 0
   Top = 0
-  Height = 220
-  Width = 330
+  ClientHeight = 181
+  ClientWidth = 314
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OldCreateOrder = True
+  PixelsPerInch = 96
+  TextHeight = 13
   object P_Color: TPanel
     AlignWithMargins = True
     Left = 10
     Top = 41
-    Width = 315
-    Height = 166
+    Width = 294
+    Height = 130
     Margins.Left = 10
     Margins.Top = 0
     Margins.Right = 10
@@ -30,7 +33,7 @@ object fmColorVisualizer: TfmColorVisualizer
     AlignWithMargins = True
     Left = 10
     Top = 10
-    Width = 315
+    Width = 294
     Height = 21
     Margins.Left = 10
     Margins.Top = 10

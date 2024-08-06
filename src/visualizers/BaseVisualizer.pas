@@ -16,6 +16,9 @@ type
     fNotifierIndex : Integer;
     fForm : TCustomForm;
     fClosedProc : TOTAVisualizerClosedProcedure;
+    fPixelsPerInch: Integer;
+    fOldCreateOrder: Boolean;
+    fTextHeight: Integer;
   protected
     function Evaluate(aExpression : String) : String;
     procedure Loaded; override;
@@ -43,6 +46,12 @@ type
     procedure RefreshVisualizer(const Expression, TypeName, EvalResult: string); virtual;
     procedure SetClosedCallback(ClosedProc: TOTAVisualizerClosedProcedure);
 
+  published
+    property ClientHeight;
+    property ClientWidth;
+    property OldCreateOrder : Boolean read fOldCreateOrder write fOldCreateOrder;
+    property PixelsPerInch : Integer read fPixelsPerInch write fPixelsPerInch;
+    property TextHeight : Integer read fTextHeight write fTextHeight;
 
   end;
 
@@ -102,6 +111,8 @@ type
 
 implementation
 
+{$R *.dfm}
+
 uses
   OTAFunctions, OTAInterfaces;
 
@@ -151,6 +162,8 @@ end;
 procedure TfrmBaseVisualizer.Loaded;
 begin
   inherited;
+  Height := 350;
+  Width := 400;
 end;
 
 procedure TfrmBaseVisualizer.MarkUnavailable(

@@ -8,7 +8,7 @@ implementation
 
 uses
   OTAInterfaces, ToolsAPI, Generics.Collections, ColorVisualizer,
-  System.SysUtils, ImageVisualizer;
+  System.SysUtils, ImageVisualizer, ControlVisualizer;
 
 var
   Visualizers : TList<IOTADebuggerVisualizer>;
@@ -23,6 +23,7 @@ begin
     Visualizers := TList<IOTADebuggerVisualizer>.Create();
     Visualizers.Add(TColorVisualizer.Create());
     Visualizers.Add(TImageVisualizer.Create());
+    Visualizers.Add(TControlVisualizer.Create());
 
     for wVisualizer in Visualizers do
       wDebuggerServices.RegisterDebugVisualizer(wVisualizer);

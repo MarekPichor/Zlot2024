@@ -43,6 +43,7 @@ contains
   BaseVisualizer in 'src\visualizers\BaseVisualizer.pas',
   ImageVisualizer in 'src\visualizers\ImageVisualizer.pas',
   FileUtils in 'src\FileUtils.pas',
-  ComponentVisualizer in 'src\visualizers\ComponentVisualizer.pas' {Frame1: TFrame};
+  ControlVisualizer in 'src\visualizers\ControlVisualizer.pas' {Frame1: TFrame},
+  ControlUtils in 'src\ControlUtils.pas';
 
 end.

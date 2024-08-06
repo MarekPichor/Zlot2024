@@ -1,8 +1,8 @@
-object fmImageVisualizer: TfmImageVisualizer
+object fmControlVisualizer: TfmControlVisualizer
   Left = 0
   Top = 0
-  ClientHeight = 201
-  ClientWidth = 304
+  ClientHeight = 211
+  ClientWidth = 284
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object fmImageVisualizer: TfmImageVisualizer
   TextHeight = 13
   object P_Options: TPanel
     Left = 0
-    Top = 160
-    Width = 304
+    Top = 170
+    Width = 284
     Height = 41
     Align = alBottom
     BevelOuter = bvNone
@@ -24,7 +24,7 @@ object fmImageVisualizer: TfmImageVisualizer
     TabOrder = 0
     object L_Size: TLabel
       AlignWithMargins = True
-      Left = 264
+      Left = 244
       Top = 3
       Width = 30
       Height = 38
@@ -32,20 +32,6 @@ object fmImageVisualizer: TfmImageVisualizer
       Align = alRight
       Caption = 'L_Size'
       Layout = tlCenter
-    end
-    object CB_Stretch: TCheckBox
-      AlignWithMargins = True
-      Left = 10
-      Top = 3
-      Width = 54
-      Height = 35
-      Margins.Left = 10
-      Align = alLeft
-      Caption = 'Stretch'
-      Checked = True
-      State = cbChecked
-      TabOrder = 0
-      OnClick = CB_StretchClick
     end
     object CB_Proportional: TCheckBox
       AlignWithMargins = True
@@ -58,15 +44,29 @@ object fmImageVisualizer: TfmImageVisualizer
       Caption = 'Proportional'
       Checked = True
       State = cbChecked
-      TabOrder = 1
+      TabOrder = 0
       OnClick = CB_ProportionalClick
+    end
+    object CB_Stretch: TCheckBox
+      AlignWithMargins = True
+      Left = 10
+      Top = 3
+      Width = 54
+      Height = 35
+      Margins.Left = 10
+      Align = alLeft
+      Caption = 'Stretch'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+      OnClick = CB_StretchClick
     end
   end
   object P_Content: TPanel
     Left = 0
     Top = 0
-    Width = 304
-    Height = 160
+    Width = 284
+    Height = 170
     Align = alClient
     BevelOuter = bvNone
     Caption = 'P_Options'
@@ -76,8 +76,8 @@ object fmImageVisualizer: TfmImageVisualizer
       AlignWithMargins = True
       Left = 10
       Top = 10
-      Width = 284
-      Height = 140
+      Width = 264
+      Height = 150
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
