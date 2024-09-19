@@ -8,9 +8,11 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.DApt, FireDAC.Comp.Script, FireDAC.Comp.ScriptCommands,
-  System.SysUtils, Vcl.Dialogs{, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteWrapper};
+  System.SysUtils, Vcl.Dialogs, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
+  System.Classes, FireDAC.Phys.SQLite;
 
 type
+
   TConnection = class
   private
     fConnection : TFDConnection;
@@ -25,10 +27,7 @@ type
     function Query(aSQL : String) : TDataSet;
   end;
 
-
 implementation
-
-{ TConnection }
 
 procedure TConnection.Connect;
 begin

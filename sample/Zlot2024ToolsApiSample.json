@@ -1,0 +1,8 @@
+﻿{    
+    "restrictedUses": {
+        "FireDAC can be only used in uDB.pas": {
+            "uses": ["FireDAC*"],
+            "allowedIn": ["uDB"]
+        }
+    }
+}

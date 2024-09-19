@@ -5,14 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Grids, uDBHandler, FireDAC.Stan.ExprFuncs, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.Intf, FireDAC.Phys, FireDAC.Phys.SQLite, Data.DB, Vcl.DBGrids, Grid;
+  Vcl.Grids, uDBHandler, Data.DB, Vcl.DBGrids, Grid{, FireDAC.Phys.SQLite};
 
 type
   TfMain = class(TForm)
     PageControl1: TPageControl;
     TS_Visualizers: TTabSheet;
-    FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -47,3 +45,4 @@ begin
 end;
 
 end.
+

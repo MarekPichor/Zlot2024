@@ -44,6 +44,11 @@ contains
   ImageVisualizer in 'src\visualizers\ImageVisualizer.pas',
   FileUtils in 'src\FileUtils.pas',
   ControlVisualizer in 'src\visualizers\ControlVisualizer.pas' {Frame1: TFrame},
-  ControlUtils in 'src\ControlUtils.pas';
+  ControlUtils in 'src\ControlUtils.pas',
+  IDENotifier in 'src\compile\IDENotifier.pas',
+  UsesAnalyzer in 'src\compile\UsesAnalyzer.pas',
+  mPasLex in 'src\compile\lib\mPasLex.pas',
+  UsesManager in 'src\compile\lib\UsesManager.pas',
+  CompileNotifierRegister in 'src\compile\CompileNotifierRegister.pas';
 
 end.

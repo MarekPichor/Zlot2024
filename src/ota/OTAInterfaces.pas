@@ -27,6 +27,9 @@ type
     function EditBuffer: IOTAEditBuffer;
     function DebuggerServices: IOTADebuggerServices;
     function ThemeServices: IOTAIDEThemingServices250;
+    function CompileServices : IOTACompileServices;
+    function Services: IOTAServices;
+    function MessageServices: IOTAMessageServices;
   end;
 
 var
@@ -42,6 +45,11 @@ uses
 function TOTAInterfaces.ActionServices: IOTAActionServices;
 begin
   Result := BorlandIDEServices as IOTAActionServices;
+end;
+
+function TOTAInterfaces.CompileServices: IOTACompileServices;
+begin
+  Result := BorlandIDEServices as IOTACompileServices;
 end;
 
 function TOTAInterfaces.CurrentFormEditor: IOTAFormEditor;
@@ -173,6 +181,11 @@ begin
   Result := nil;
 end;
 
+function TOTAInterfaces.MessageServices: IOTAMessageServices;
+begin
+  Result := BorlandIDEServices as IOTAMessageServices;
+end;
+
 function TOTAInterfaces.ModuleServices: IOTAModuleServices;
 begin
   QuerySvcs(BorlandIDEServices, IOTAModuleServices, Result);
@@ -205,6 +218,11 @@ function TOTAInterfaces.QuerySvcs(const Instance: IInterface;
   const Intf: TGUID; out Inst): Boolean;
 begin
   Result := (Instance <> nil) and Supports(Instance, Intf, Inst);
+end;
+
+function TOTAInterfaces.Services: IOTAServices;
+begin
+  Result := BorlandIDEServices as IOTAServices;
 end;
 
 function TOTAInterfaces.SourceEditor: IOTASourceEditor;

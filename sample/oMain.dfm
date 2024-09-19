@@ -28,8 +28,4 @@ object fMain: TfMain
       Caption = 'Visualizers'
     end
   end
-  object FDPhysSQLiteDriverLink1: TFDPhysSQLiteDriverLink
-    Left = 932
-    Top = 336
-  end
 end
