@@ -42,13 +42,20 @@ contains
   ColorVisualizer in 'src\visualizers\ColorVisualizer.pas',
   BaseVisualizer in 'src\visualizers\BaseVisualizer.pas',
   ImageVisualizer in 'src\visualizers\ImageVisualizer.pas',
-  FileUtils in 'src\FileUtils.pas',
   ControlVisualizer in 'src\visualizers\ControlVisualizer.pas' {Frame1: TFrame},
-  ControlUtils in 'src\ControlUtils.pas',
   IDENotifier in 'src\compile\IDENotifier.pas',
   UsesAnalyzer in 'src\compile\UsesAnalyzer.pas',
   mPasLex in 'src\compile\lib\mPasLex.pas',
   UsesManager in 'src\compile\lib\UsesManager.pas',
-  CompileNotifierRegister in 'src\compile\CompileNotifierRegister.pas';
+  CompileNotifierRegister in 'src\compile\CompileNotifierRegister.pas',
+  HelpEditorView in 'src\editor\HelpEditorView.pas',
+  HelpEditorFrame in 'src\editor\HelpEditorFrame.pas' {frmHelpEditorFrame: TFrame},
+  HelpEditorRegister in 'src\editor\HelpEditorRegister.pas',
+  RTTIUtils in 'src\utils\RTTIUtils.pas',
+  ControlUtils in 'src\utils\ControlUtils.pas',
+  FileUtils in 'src\utils\FileUtils.pas',
+  MessageUtils in 'src\utils\MessageUtils.pas',
+  TabManagerToolbar in 'src\toolbar\TabManagerToolbar.pas',
+  TabManager in 'src\toolbar\TabManager.pas';
 
 end.
