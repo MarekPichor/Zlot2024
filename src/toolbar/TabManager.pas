@@ -37,16 +37,18 @@ type
     function GetModulesInOrder() : TArray<IOTAModule>;
     function SaveCurrent(aName : String) : Boolean; overload;
     function Save(aTabSet : TTabSet) : Boolean;
-    function GetTabSet(aName : String) : TTabSet;
     function GetFileName() : String;
-    procedure LoadTabSetList();
-    procedure SaveTabSetList();
     procedure RestoreTabs(aTabSet : TTabSet);
     procedure CloseAllTabs();
+    function IsSourceFile(aModule : IOTAModule) : Boolean;
+    procedure LoadTabSetList();
   public
     function SaveCurrent() : Boolean; overload;
     procedure Load(aName : String);
     procedure LoadNames(aList : TStrings);
+    function GetTabSet(aName : String) : TTabSet;
+    function RemoveTabSet(aName : String) : Boolean;
+    procedure SaveTabSetList();
     destructor Destroy; override;
   end;
 
@@ -64,7 +66,7 @@ var
 begin
   wModule := Interfaces.ModuleServices.CurrentModule;
   while wModule <> nil do begin
-    if SameText(ExtractFileExt(wModule.FileName), '.pas') then
+    if IsSourceFile(wModule) then
       wModule.CloseModule(False)
     else
       Break;
@@ -148,6 +150,11 @@ begin
   end;
 end;
 
+function TTabManager.IsSourceFile(aModule: IOTAModule): Boolean;
+begin
+  Result := SameText(ExtractFileExt(aModule.FileName), '.pas');
+end;
+
 procedure TTabManager.Load(aName: String);
 var
   wTabSet : TTabSet;
@@ -188,6 +195,18 @@ begin
   LoadTabSetList();
   for wTabSet in fTabSetList.Sets do
     aList.Add(wTabSet.Name);
+end;
+
+function TTabManager.RemoveTabSet(aName: String): Boolean;
+var
+  wTabSet : TTabSet;
+begin
+  wTabSet := GetTabSet(aName);
+  Result := wTabSet <> nil;
+  if Result then
+    Result := fTabSetList.Sets.Remove(wTabSet) > -1;
+  if Result then
+    SaveTabSetList();
 end;
 
 procedure TTabManager.RestoreTabs(aTabSet: TTabSet);
@@ -242,8 +261,7 @@ var
   wName : String;
 begin
   Result := False;
-  wName := InputBox('Name', 'Name of the new tab list', '');
-  if not wName.IsEmpty() then
+  if Input('Name', 'Name of the new tab list', wName) then
     Result := SaveCurrent(wName);
 end;
 

@@ -18,6 +18,8 @@ type
     function FindToolButton(aName : String) : TToolButton;
     procedure UpdateToolbar();
     procedure OnTabSetLoad(Sender : TObject);
+    procedure OnTabCustomize(Sender : TObject);
+    procedure OnToolButtonPopup(Sender : TObject);
     procedure LoadDropDownMenu();
   public
     constructor Create();
@@ -31,7 +33,7 @@ implementation
 
 uses
   OTAInterfaces, ToolsApi, SysUtils, Vcl.Menus,
-  System.Rtti, Vcl.Forms, Vcl.ExtCtrls;
+  System.Rtti, Vcl.Forms, Vcl.ExtCtrls, TabManagerCustomize;
 
 type
 
@@ -106,6 +108,18 @@ begin
       wItem.OnClick := OnTabSetLoad;
       fToolButton.DropdownMenu.Items.Add(wItem);
     end;
+
+    if fToolButton.DropdownMenu.Items.Count > 0 then begin
+      wItem := TTabMenuItem.Create(fToolButton.DropdownMenu);
+      wItem.Caption := '-';
+      fToolButton.DropdownMenu.Items.Add(wItem);
+    end;
+
+    wItem := TTabMenuItem.Create(fToolButton.DropdownMenu);
+    wItem.Caption := 'Customize';
+    wItem.OnClick := OnTabCustomize;
+    fToolButton.DropdownMenu.Items.Add(wItem);
+
   finally
     wNames.Free;
   end;
@@ -113,8 +127,19 @@ end;
 
 procedure TTabManagerToolbar.OnMenuActionExecute(Sender: TObject);
 begin
-  if fTabManager.SaveCurrent() then
-    LoadDropDownMenu();
+  fTabManager.SaveCurrent();
+end;
+
+procedure TTabManagerToolbar.OnTabCustomize(Sender: TObject);
+var
+  wForm : TfTabManagerCustomize;
+begin
+  wForm := TfTabManagerCustomize.Create(nil, fTabManager);
+  try
+    wForm.ShowModal();
+  finally
+    wForm.Free;
+  end;
 end;
 
 procedure TTabManagerToolbar.OnTabSetLoad(Sender: TObject);
@@ -122,6 +147,11 @@ begin
   if Sender is TTabMenuItem then begin
     fTabManager.Load(TTabMenuItem(Sender).TabSetName);
   end;
+end;
+
+procedure TTabManagerToolbar.OnToolButtonPopup(Sender: TObject);
+begin
+  LoadDropDownMenu();
 end;
 
 //based on http://blog.livedoor.jp/locked_empty_shell/archives/21319291.html
@@ -192,8 +222,7 @@ begin
   fToolButton.Style := tbsDropDown;
   fToolButton.Enabled := True;
   fToolButton.Action := fMenuAction;
-
-  LoadDropDownMenu();
+  fToolButton.DropdownMenu.OnPopup := OnToolButtonPopup;
 
 end;
 
