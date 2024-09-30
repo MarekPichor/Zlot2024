@@ -106,7 +106,7 @@
         <DCCReference Include="uDBHandler.pas"/>
         <DCCReference Include="Grid.pas"/>
         <DCCReference Include="PngUtils.pas"/>
-        <DCCReference Include="..\src\ControlUtils.pas"/>
+        <DCCReference Include="..\src\utils\ControlUtils.pas"/>
         <DCCReference Include="uDB.pas">
             <Form>TDBDataModule</Form>
             <FormType>dfm</FormType>
