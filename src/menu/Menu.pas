@@ -41,7 +41,7 @@ end;
 
 procedure TMenu.CreateItems;
 begin
-  CreateItem('Poka¿ nazwê pliku', OnShowFileName);
+  CreateItem('Show file name', OnShowFileName);
 end;
 
 procedure TMenu.CreateMenu;

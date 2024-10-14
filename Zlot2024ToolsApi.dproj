@@ -78,26 +78,27 @@
         <DCC_CBuilderOutput>All</DCC_CBuilderOutput>
         <SanitizedProjectName>Zlot2024ToolsApi</SanitizedProjectName>
         <DesignOnlyPackage>true</DesignOnlyPackage>
+        <DCC_UsePackage>soaprtl;RESTComponents;FireDAC;FireDACSqliteDriver;FireDACCommonDriver;FireDACCommon;FireDACIBDriver;inet;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Android)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
         <EnabledSysJars>android-support-v4.dex.jar;cloud-messaging.dex.jar;fmx.dex.jar;google-analytics-v2.dex.jar;google-play-billing.dex.jar;google-play-licensing.dex.jar;google-play-services-ads-7.0.0.dex.jar;google-play-services-analytics-7.0.0.dex.jar;google-play-services-base-7.0.0.dex.jar;google-play-services-gcm-7.0.0.dex.jar;google-play-services-identity-7.0.0.dex.jar;google-play-services-maps-7.0.0.dex.jar;google-play-services-panorama-7.0.0.dex.jar;google-play-services-plus-7.0.0.dex.jar;google-play-services-wallet-7.0.0.dex.jar</EnabledSysJars>
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;ibxpress;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSDevice32)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;ibxpress;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSDevice64)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;ibxpress;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_iOSSimulator)'!=''">
         <DCC_CBuilderOutput>None</DCC_CBuilderOutput>
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;ibxpress;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_OSX32)'!=''">
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;ibxpress;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -105,10 +106,10 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=;FileDescription=$(MSBuildProjectName);FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProgramID=com.embarcadero.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;vclimg;vcl;vclx;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;vcldb;vclFireDAC;TeeUI;Tee;vclactnband;vclie;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;adortl;ibxpress;VclSmp;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
-        <DCC_UsePackage>rtl;$(DCC_UsePackage)</DCC_UsePackage>
+        <DCC_UsePackage>rtl;vclimg;vcl;vclx;fmx;dbrtl;IndySystem;IndyProtocols;IndyCore;dbxcds;vcldb;vclFireDAC;TeeUI;Tee;vclactnband;vclie;DbxCommonDriver;CustomIPTransport;IndyIPCommon;IndyIPClient;bindengine;bindcomp;dsnap;adortl;ibxpress;VclSmp;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -136,9 +137,6 @@
         </DelphiCompile>
         <DCCReference Include="rtl.dcp"/>
         <DCCReference Include="designide.dcp"/>
-        <DCCReference Include="src\Wizard.pas"/>
-        <DCCReference Include="src\Menu.pas"/>
-        <DCCReference Include="src\Startup.pas"/>
         <DCCReference Include="src\ota\OTAFunctions.pas"/>
         <DCCReference Include="src\ota\OTAInterfaces.pas"/>
         <DCCReference Include="src\visualizers\VisualizerRegister.pas"/>
@@ -157,7 +155,6 @@
         <DCCReference Include="src\editor\HelpEditorView.pas"/>
         <DCCReference Include="src\editor\HelpEditorFrame.pas">
             <Form>frmHelpEditorFrame</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="src\editor\HelpEditorRegister.pas"/>
@@ -169,8 +166,9 @@
         <DCCReference Include="src\toolbar\TabManager.pas"/>
         <DCCReference Include="src\toolbar\TabManagerCustomize.pas">
             <Form>fTabManagerCustomize</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\menu\MenuRegister.pas"/>
+        <DCCReference Include="src\menu\Menu.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -192,6 +190,8 @@
                     <Source Name="MainSource">Zlot2024ToolsApi.dpk</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="c:\Program Files\Git\stGitTools\mGit.bpl">(untitled)</Excluded_Packages>
+                    <Excluded_Packages Name="U:\interbase\inne\stAddons\run\stDelphiAddons10.bpl">(untitled)</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>

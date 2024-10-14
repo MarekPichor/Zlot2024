@@ -6,9 +6,10 @@ uses
   ToolsApi;
 
 type
+/// <summary>
+///   Wystawione interfejsy ToolsApi
+/// </summary>
   TOTAInterfaces = class
-  private
-    function QuerySvcs(const Instance: IUnknown; const Intf: TGUID; out Inst): Boolean;
   public
     function ProjectGroup : IOTAProjectGroup;
     function CurrentProject : IOTAProject;
@@ -30,6 +31,7 @@ type
     function CompileServices : IOTACompileServices;
     function Services: IOTAServices;
     function MessageServices: IOTAMessageServices;
+    function EditorServices : IOTAEditorServices;
   end;
 
 var
@@ -66,14 +68,8 @@ begin
 end;
 
 function TOTAInterfaces.CurrentModule: IOTAModule;
-var
-  wModuleServices: IOTAModuleServices;
 begin
-  QuerySvcs(BorlandIDEServices, IOTAModuleServices, wModuleServices);
-  if wModuleServices = nil then
-    Result := nil
-  else
-    Result := wModuleServices.CurrentModule;
+  Result := ModuleServices.CurrentModule;
 end;
 
 function TOTAInterfaces.CurrentProject: IOTAProject;
@@ -95,25 +91,17 @@ end;
 
 function TOTAInterfaces.DebuggerServices: IOTADebuggerServices;
 begin
-  QuerySvcs(BorlandIDEServices, IOTADebuggerServices, Result);
+  Result := BorlandIDEServices as IOTADebuggerServices;
 end;
 
 function TOTAInterfaces.EditActions: IOTAEditActions;
 begin
-  QuerySvcs(EditView, IOTAEditActions, Result);
+  Result := EditView as IOTAEditActions;
 end;
 
 function TOTAInterfaces.EditBuffer: IOTAEditBuffer;
-var
-  wEditorServices: IOTAEditorServices;
 begin
-  QuerySvcs(BorlandIDEServices, IOTAEditorServices, wEditorServices);
-  if wEditorServices <> nil then
-  begin
-    Result := wEditorServices.GetTopBuffer;
-    Exit;
-  end;
-  Result := nil;
+  Result := EditorServices.GetTopBuffer;
 end;
 
 function TOTAInterfaces.Editor: IOTAEditor;
@@ -124,6 +112,11 @@ begin
   if wModule = nil then
     Exit(nil);
   Result := wModule.CurrentEditor;
+end;
+
+function TOTAInterfaces.EditorServices: IOTAEditorServices;
+begin
+  Result := BorlandIDEServices as IOTAEditorServices;
 end;
 
 function TOTAInterfaces.EditorViewServices: IOTAEditorViewServices;
@@ -147,17 +140,7 @@ end;
 function TOTAInterfaces.Editor(const aModule: IOTAModule;
   aIndex: Integer): IOTAEditor;
 begin
-  Result := nil;
-  if not Assigned(aModule) then Exit;
-  try
-    {$IFDEF BCB5}
-    if IsCpp(Module.FileName) and (Module.GetModuleFileCount = 2) and (Index = 1) then
-      Index := 2;   qweqwe
-    {$ENDIF}
-    Result := aModule.GetModuleFileEditor(aIndex);
-  except
-    Result := nil;
-  end;
+  Result := aModule.GetModuleFileEditor(aIndex)
 end;
 
 function TOTAInterfaces.FormEditor(const aModule: IOTAModule): IOTAFormEditor;
@@ -188,7 +171,7 @@ end;
 
 function TOTAInterfaces.ModuleServices: IOTAModuleServices;
 begin
-  QuerySvcs(BorlandIDEServices, IOTAModuleServices, Result);
+  Result := BorlandIDEServices as IOTAModuleServices;
 end;
 
 function TOTAInterfaces.NTAServices: INTAServices;
@@ -198,26 +181,15 @@ end;
 
 function TOTAInterfaces.ProjectGroup: IOTAProjectGroup;
 var
-  wModuleServices: IOTAModuleServices;
   wModule: IOTAModule;
   i: Integer;
 begin
-  QuerySvcs(BorlandIDEServices, IOTAModuleServices, wModuleServices);
-  if wModuleServices <> nil then begin
-    for i := 0 to wModuleServices.ModuleCount - 1 do
-    begin
-      wModule := wModuleServices.Modules[i];
-      if Supports(wModule, IOTAProjectGroup, Result) then
-        Exit;
-    end;
+  for i := 0 to ModuleServices.ModuleCount - 1 do
+  begin
+    wModule := ModuleServices.Modules[i];
+    if Supports(wModule, IOTAProjectGroup, Result) then
+      Exit;
   end;
-  Result := nil;
-end;
-
-function TOTAInterfaces.QuerySvcs(const Instance: IInterface;
-  const Intf: TGUID; out Inst): Boolean;
-begin
-  Result := (Instance <> nil) and Supports(Instance, Intf, Inst);
 end;
 
 function TOTAInterfaces.Services: IOTAServices;
@@ -238,7 +210,7 @@ end;
 
 function TOTAInterfaces.ThemeServices: IOTAIDEThemingServices250;
 begin
-  QuerySvcs(BorlandIDEServices, IOTAIDEThemingServices250, Result);
+  Result := BorlandIDEServices as IOTAIDEThemingServices250;
 end;
 
 initialization

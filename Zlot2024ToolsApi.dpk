@@ -33,9 +33,6 @@ requires
   designide;
 
 contains
-  Wizard in 'src\Wizard.pas',
-  Menu in 'src\Menu.pas',
-  Startup in 'src\Startup.pas',
   OTAFunctions in 'src\ota\OTAFunctions.pas',
   OTAInterfaces in 'src\ota\OTAInterfaces.pas',
   VisualizerRegister in 'src\visualizers\VisualizerRegister.pas',
@@ -57,6 +54,8 @@ contains
   MessageUtils in 'src\utils\MessageUtils.pas',
   TabManagerToolbar in 'src\toolbar\TabManagerToolbar.pas',
   TabManager in 'src\toolbar\TabManager.pas',
-  TabManagerCustomize in 'src\toolbar\TabManagerCustomize.pas' {fTabManagerCustomize};
+  TabManagerCustomize in 'src\toolbar\TabManagerCustomize.pas' {fTabManagerCustomize},
+  MenuRegister in 'src\menu\MenuRegister.pas',
+  Menu in 'src\menu\Menu.pas';
 
 end.

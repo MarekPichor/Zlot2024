@@ -15,12 +15,12 @@ type
     fTabManager : TTabManager;
     procedure OnMenuActionExecute(Sender : TObject);
     procedure RemoveToolbar();
-    function FindToolButton(aName : String) : TToolButton;
     procedure UpdateToolbar();
     procedure OnTabSetLoad(Sender : TObject);
     procedure OnTabCustomize(Sender : TObject);
     procedure OnToolButtonPopup(Sender : TObject);
     procedure LoadDropDownMenu();
+    procedure DestroyAllButtons();
   public
     constructor Create();
     destructor Destroy; override;
@@ -51,6 +51,7 @@ type
 
 const
   TOOLBAR_NAME = 'TabManagerToolbar';
+  TOOLBAR_CAPTION = 'Tab manager';
   MENUACTION_NAME = 'TabManagerMenuAction';
   TOOLBUTTON_NAME = 'TabManagerToolButton';
 
@@ -77,17 +78,16 @@ begin
   inherited;
 end;
 
-function TTabManagerToolbar.FindToolButton(aName: String): TToolButton;
+procedure TTabManagerToolbar.DestroyAllButtons;
 var
   i : Integer;
-  wButton : TToolButton;
+  wButton : TControl;
 begin
-  for i := 0 to fToolbar.ButtonCount - 1 do begin
+  for i := fToolbar.ButtonCount - 1 downto 0 do begin
     wButton := fToolbar.Buttons[i];
-    if SameText(wButton.Name, aName) then
-      Exit(wButton);
+    fToolbar.RemoveControl(fToolbar.Buttons[i]);
+    wButton.Free;
   end;
-  Result := nil;
 end;
 
 procedure TTabManagerToolbar.LoadDropDownMenu;
@@ -194,7 +194,7 @@ procedure TTabManagerToolbar.UpdateToolbar;
 begin
   fToolbar := Interfaces.NTAServices.ToolBar[TOOLBAR_NAME];
   if fToolbar = nil then begin
-    fToolbar := Interfaces.NTAServices.NewToolbar(TOOLBAR_NAME, 'Tab manager', sCustomToolBar, True);
+    fToolbar := Interfaces.NTAServices.NewToolbar(TOOLBAR_NAME, TOOLBAR_CAPTION, sCustomToolBar, True);
   end;
 
   fTest := fToolbar.Name;
@@ -210,13 +210,11 @@ begin
   fMenuAction.OnExecute := OnMenuActionExecute;
   fMenuAction.Enabled := True;
   Interfaces.NTAServices.AddActionMenu('', fMenuAction, nil);
-  fMenuAction.Category := 'Tab manger';
+  fMenuAction.Category := TOOLBAR_CAPTION;
   fMenuAction.ImageIndex := 3;
 
-  fToolButton := FindToolButton(TOOLBUTTON_NAME);
-  if fToolButton = nil then begin
-    fToolButton := TToolButton(Interfaces.NTAServices.AddToolButton(TOOLBAR_NAME, TOOLBUTTON_NAME, fMenuAction));
-  end;
+  DestroyAllButtons();
+  fToolButton := TToolButton(Interfaces.NTAServices.AddToolButton(TOOLBAR_NAME, TOOLBUTTON_NAME, fMenuAction));
 
   fToolButton.DropdownMenu := TPopupMenu.Create(fToolButton);
   fToolButton.Style := tbsDropDown;

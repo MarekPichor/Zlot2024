@@ -40,8 +40,10 @@ type
     function GetFileName() : String;
     procedure RestoreTabs(aTabSet : TTabSet);
     procedure CloseAllTabs();
-    function IsSourceFile(aModule : IOTAModule) : Boolean;
+    function IsInProjectManager(aModule : IOTAModule) : Boolean;
     procedure LoadTabSetList();
+  protected
+    function ShouldClose(aModule : IOTAModule) : Boolean;
   public
     function SaveCurrent() : Boolean; overload;
     procedure Load(aName : String);
@@ -63,14 +65,13 @@ uses
 procedure TTabManager.CloseAllTabs;
 var
   wModule : IOTAModule;
+  i : Integer;
 begin
   wModule := Interfaces.ModuleServices.CurrentModule;
-  while wModule <> nil do begin
-    if IsSourceFile(wModule) then
+  for i := Interfaces.ModuleServices.ModuleCount - 1 downto 0 do begin
+    wModule := Interfaces.ModuleServices.Modules[i];
+    if ShouldClose(wModule) then
       wModule.CloseModule(False)
-    else
-      Break;
-    wModule := Interfaces.ModuleServices.CurrentModule;
   end;
 end;
 
@@ -150,9 +151,12 @@ begin
   end;
 end;
 
-function TTabManager.IsSourceFile(aModule: IOTAModule): Boolean;
+function TTabManager.IsInProjectManager(aModule: IOTAModule): Boolean;
+var
+  wExt : String;
 begin
-  Result := SameText(ExtractFileExt(aModule.FileName), '.pas');
+  wExt := ExtractFileExt(aModule.FileName);
+  Result := SameText(wExt, '.dpr') or SameText(wExt, '.dproj') or SameText(wExt, '.groupproj');
 end;
 
 procedure TTabManager.Load(aName: String);
@@ -279,6 +283,11 @@ begin
   except
     fTabSetList.Sets.Clear();
   end;
+end;
+
+function TTabManager.ShouldClose(aModule: IOTAModule): Boolean;
+begin
+  Result := not IsInProjectManager(aModule);
 end;
 
 { TTabSet }

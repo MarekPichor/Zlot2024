@@ -183,7 +183,7 @@ begin
   end;
   SG_TabSetContent.RowCount := SG_TabSetContent.FixedRows + Max(1, wTabSet.Tabs.Count);
   for i := 0 to wTabSet.Tabs.Count - 1 do begin
-    wUnit := ChangeFileExt(ExtractFileName(wTabSet.Tabs[i]), '');
+    wUnit := ExtractFileName(wTabSet.Tabs[i]);
     SG_TabSetContent.Cells[0, i + 1] := wUnit;
   end;
 end;

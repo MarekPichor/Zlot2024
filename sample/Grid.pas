@@ -17,10 +17,8 @@ type
     procedure DrawCell(ACol: Integer; ARow: Integer; ARect: TRect;
       AState: TGridDrawState); override;
     procedure LayoutChanged; override;
-    procedure DrawDataCell(const Rect: TRect; Field: TField;
-      State: TGridDrawState); override;
     procedure DrawImage(aRect : TRect; aField : TField);
-
+    function GetBackgroundColor(aState : TGridDrawState) : TColor;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -52,13 +50,7 @@ var
   wText : String;
   wOldActiveRecord : Integer;
 begin
-
-  if gdFixed in AState then
-    Canvas.Brush.Color := $00B2B2FF
-  else if gdSelected in AState then
-    Canvas.Brush.Color := $00FAD1D1
-  else
-    Canvas.Brush.Color := clWhite;
+  Canvas.Brush.Color := GetBackgroundColor(aState);
   Canvas.FillRect(aRect);
 
   wText := '';
@@ -81,18 +73,6 @@ begin
 
   if not wText.IsEmpty() then
     Canvas.TextRect(ARect, wText, [tfCenter, tfEndEllipsis, tfVerticalCenter, tfSingleLine]);
-end;
-
-procedure TGrid.DrawDataCell(const Rect: TRect; Field: TField;
-  State: TGridDrawState);
-var
-  wText : String;
-  wRect : TRect;
-begin
-  inherited;
-  wText := Field.AsString;
-  wRect := Rect;
-  Canvas.TextRect(wRect, wText, []);
 end;
 
 procedure TGrid.DrawImage(aRect: TRect; aField: TField);
@@ -118,6 +98,16 @@ begin
     end;
   end;
  Canvas.Draw(aRect.Left + (aRect.Width - wPngImage.Width) div 2, aRect.Top, wPngImage);
+end;
+
+function TGrid.GetBackgroundColor(aState: TGridDrawState): TColor;
+begin
+  if gdFixed in AState then
+    Result := $00B2B2FF
+  else if gdSelected in AState then
+    Result := $00FAD1D1
+  else
+    Result := clWhite;
 end;
 
 procedure TGrid.LayoutChanged;

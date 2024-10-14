@@ -70,8 +70,8 @@ procedure TfmColorVisualizer.UpdateColor(aExpression: String);
 var
   wRes : String;
 begin
-  wRes := Evaluate(aExpression);
   try
+    wRes := Evaluate(aExpression);
     P_Color.ShowCaption := False;
     P_Color.ParentBackground := False;
     UpdateColor(TColor(StrToInt(wRes)))
